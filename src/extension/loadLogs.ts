@@ -8,7 +8,7 @@ import { eq, gt, lt } from 'semver';
 import { Uri, window, workspace } from 'vscode';
 import { augmentLog } from '../shared';
 import { overrideBaseUri } from '../shared/overrideBaseUri';
-import * as Telemetry from './telemetry';
+
 
 const driverlessRules = new Map<string, ReportingDescriptor>();
 
@@ -29,7 +29,6 @@ export async function loadLogs(uris: Uri[], token?: { isCancellationRequested: b
         })
         .filter(log => log) as Log[];
 
-    logs.forEach(log => Telemetry.sendLogVersion(log.version, log.$schema ?? ''));
     logs.forEach(tryFastUpgradeLog);
 
     const logsSupported = [] as Log[];

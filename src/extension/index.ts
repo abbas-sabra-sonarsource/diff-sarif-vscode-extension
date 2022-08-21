@@ -12,7 +12,6 @@ import platformUriNormalize from './platformUriNormalize';
 import { regionToSelection } from './regionToSelection';
 import { ResultDiagnostic } from './resultDiagnostic';
 import { Store } from './store';
-import * as Telemetry from './telemetry';
 import { update, updateChannelConfigSection } from './update';
 import { UriRebaser } from './uriRebaser';
 
@@ -22,7 +21,6 @@ export async function activate(context: ExtensionContext) {
         process.execArgv.some(arg => /^--extensionTestsPath=?/.test(arg)) // Debug
         || process.execArgv.some(arg => /^--(debug|debug-brk|inspect|inspect-brk)=?/.test(arg)); // Test
 
-    if (!isDebugOrTestMode) Telemetry.activate();
 
     const disposables = context.subscriptions;
     Store.globalState = context.globalState;

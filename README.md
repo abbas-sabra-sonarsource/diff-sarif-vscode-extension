@@ -1,6 +1,3 @@
-[![](https://vsmarketplacebadge.apphb.com/version-short/MS-SarifVSCode.sarif-viewer.svg)](https://marketplace.visualstudio.com/items?itemName=MS-SarifVSCode.sarif-viewer)
-[![](https://vsmarketplacebadge.apphb.com/downloads-short/MS-SarifVSCode.sarif-viewer.svg)](https://marketplace.visualstudio.com/items?itemName=MS-SarifVSCode.sarif-viewer)
-
 # SARIF Viewer for Visual Studio Code
 
 A [Visual Studio Code](https://code.visualstudio.com/) [extension](https://marketplace.visualstudio.com/VSCode) that adds support for viewing [SARIF](https://sarifweb.azurewebsites.net/) logs. SARIF log results can be viewed as squiggles in your source, in the Problems list, or in a dedicated **SARIF Results Panel**. The **SARIF Results Panel** offers richer grouping, filtering, column, and details options over the standard Problems list.
@@ -44,9 +41,6 @@ await sarifExt.exports.openLogs([
 ]);
 ```
 Note: TypeScript typings for `Extension<T>` are forthcoming.
-
-## Telemetry
-We collect basic anonymous information such as activation and the versions/schemas of any logs opened. Opt-in or out via the general Visual Studio Code setting `telemetry.enableTelemetry`.
 
 ## Development
 

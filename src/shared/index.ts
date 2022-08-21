@@ -200,7 +200,7 @@ export function parseArtifactLocation(result: Result, anyArtLoc: ArtifactLocatio
     // Convert possible relative URIs to absolute. Also serves to normalize leading slashes.
     // skipEncoding=true because otherwise 'file:///c:' incorrectly round-trips as 'file:///c%3A'.
     const normalizeUri = (uri: string) => URI.parse(uri, false /* allow relative URI */).toString(true /* skipEncoding */);
-    const uri = relativeUri && normalizeUri(urlJoin(uriBase, relativeUri));
+    const uri = relativeUri && ((relativeUri.startsWith("file:/") && relativeUri) || normalizeUri(urlJoin(uriBase, relativeUri)));
 
     // A shorter more transparent URI format would be:
     // `sarif://${encodeURIComponent(result._log._uri)}/${result._run._index}/${anyArtLoc.index}/${uri?.file ?? 'Untitled'}`

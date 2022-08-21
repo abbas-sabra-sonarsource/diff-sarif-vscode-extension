@@ -41,11 +41,7 @@ describe('loadLogs', () => {
             workspace: {
                 workspaceFolders: undefined,
             },
-        },
-        './telemetry': {
-            activate: () => { },
-            sendLogVersion: () => { },
-        },
+        }
     };
 
     it('loads', async () => {

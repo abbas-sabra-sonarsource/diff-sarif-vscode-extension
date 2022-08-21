@@ -8,7 +8,8 @@ export function overrideBaseUri(log: Log, newBaseUri: string | undefined): void 
     for (const run of log.runs ?? []) {
         const originalUriBaseIds = run.originalUriBaseIds ?? {};
         for (const id of Object.keys(originalUriBaseIds)) {
-            originalUriBaseIds[id].uri = newBaseUri;
+            if (!originalUriBaseIds[id].uri)
+               originalUriBaseIds[id].uri = newBaseUri;
         }
     }
 }
