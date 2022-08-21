@@ -1,24 +1,22 @@
 {
-    "name": "sarif-viewer",
-    "displayName": "Sarif Viewer",
-    "description": "Adds support for viewing SARIF logs",
-    "author": "Microsoft Corporation",
+    "name": "diff-sarif-viewer",
+    "displayName": "Diff Sarif Viewer",
+    "description": "Adds support for viewing diff SARIF logs",
+    "author": "Abbas",
     "license": "MIT",
     "version": "3.2.2",
-    "publisher": "MS-SarifVSCode",
+    "publisher": "Abbas",
     "repository": {
         "type": "git",
-        "url": "https://github.com/Microsoft/sarif-vscode-extension.git"
-    },
-    "bugs": {
-        "url": "https://github.com/Microsoft/sarif-vscode-extension/issues"
+        "url": "https://github.com/abbas-sabra-sonarsource/diff-sarif-vscode-extension"
     },
     "icon": "icon.png",
     "categories": [
         "Other"
     ],
     "keywords": [
-        "sarif"
+        "sarif",
+        "diff"
     ],
     "engines": {
         "vscode": "^1.44.0"
@@ -29,6 +27,7 @@
         "onCommand:sarif.clearState"
     ],
     "main": "./out/context.js",
+    "browser": "./out/context.js",
     "contributes": {
         "configuration": {
             "title": "Sarif Viewer",
