@@ -63,7 +63,7 @@ interface DetailsProps { result: Result, height: IObservableValue<number> }
                             <span>Locations</span>			<span className="svDetailsGridLocations">
                                                                 {result.locations?.map((loc, i) => {
                                                                     const ploc = loc.physicalLocation;
-                                                                    const [uri, _] = parseArtifactLocation(result, ploc?.artifactLocation);
+                                                                    const [uri, ] = parseArtifactLocation(result, ploc?.artifactLocation);
                                                                     return <a key={i} href="#" className="ellipsis" title={uri}
                                                                         onClick={e => {
                                                                             e.preventDefault(); // Cancel # nav.
@@ -169,6 +169,7 @@ interface DetailsProps { result: Result, height: IObservableValue<number> }
                                         </div>
                                     </div>;
                                 }
+                                return undefined;
                             });
                         })()}
                     </div>

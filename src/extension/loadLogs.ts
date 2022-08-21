@@ -2,24 +2,23 @@
 // Licensed under the MIT License.
 
 /// <reference path="jsonSourceMap.d.ts" />
-import { readFileSync } from 'fs';
+import * as vscode from 'vscode';
+let fs = vscode.workspace.fs;
 import { Log, ReportingDescriptor } from 'sarif';
 import { eq, gt, lt } from 'semver';
 import { Uri, window, workspace } from 'vscode';
 import { augmentLog } from '../shared';
 import { overrideBaseUri } from '../shared/overrideBaseUri';
-import * as Telemetry from './telemetry';
 
 const driverlessRules = new Map<string, ReportingDescriptor>();
 
 export async function loadLogs(uris: Uri[], token?: { isCancellationRequested: boolean }) {
     const logs = uris
-        .map(uri => {
+        .map(async uri => {
             if (token?.isCancellationRequested) return undefined;
             try {
-                const file = readFileSync(uri.fsPath, 'utf8')  // Assume scheme file.
-                    .replace(/^\uFEFF/, ''); // Trim BOM.
-                const log = JSON.parse(file) as Log;
+                const file = await fs.readFile(uri);
+                const log = JSON.parse(file.toString()) as Log;
                 log._uri = uri.toString();
                 return log;
             } catch (error) {
@@ -29,7 +28,6 @@ export async function loadLogs(uris: Uri[], token?: { isCancellationRequested: b
         })
         .filter(log => log) as Log[];
 
-    logs.forEach(log => Telemetry.sendLogVersion(log.version, log.$schema ?? ''));
     logs.forEach(tryFastUpgradeLog);
 
     const logsSupported = [] as Log[];

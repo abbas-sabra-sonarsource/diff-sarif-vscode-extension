@@ -7,7 +7,6 @@
 
 /// <reference path="../panel/global.d.ts" />
 /// Normally 'global.d.ts' auto imports, not sure why it's not working here.
-
 import { DiagnosticSeverity } from 'vscode';
 import { URI as Uri } from 'vscode-uri';
 import { IndexStore } from '../panel/indexStore';
@@ -15,12 +14,7 @@ import { filtersColumn, filtersRow } from '../shared';
 import { log } from './mockLog';
 
 global.fetch = async () => ({ json: async () => log }) as unknown as Promise<Response>;
-global.vscode = {
-    postMessage: async (message: any) => {
-        // console.log(`wv2ex message: ${JSON.stringify(message)}`)
-        await mockVscodeTestFacing.panel_onDidReceiveMessage?.(message);
-    }
-};
+
 
 export const mockVscodeTestFacing = {
     mockFileSystem: undefined as string[] | undefined,

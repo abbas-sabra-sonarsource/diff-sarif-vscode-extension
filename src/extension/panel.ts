@@ -1,7 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-import * as fs from 'fs';
+let vscode = require("vscode");
+let fs = vscode.workspace.fs;
 import jsonMap from 'json-source-map';
 import { autorun, IArraySplice, observable, observe } from 'mobx';
 import { Log, Region, Result } from 'sarif';

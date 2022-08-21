@@ -4,7 +4,7 @@
     "description": "Adds support for viewing diff SARIF logs",
     "author": "Abbas",
     "license": "MIT",
-    "version": "3.2.2",
+    "version": "3.2.7",
     "publisher": "Abbas",
     "repository": {
         "type": "git",
@@ -79,7 +79,7 @@
         ]
     },
     "scripts": {
-        "prestart": "npm install",
+        "prestart": "npm run compile-web",
         "start": "webpack --watch --mode development",
         "server": "webpack serve --mode development",
         "test": "mocha",
@@ -87,7 +87,10 @@
         "testcoverage": "nyc mocha",
         "package": "vsce package",
         "vscode:prepublish": "webpack --mode production",
-        "lint": "eslint src"
+        "lint": "eslint src",
+        "compile-web": "webpack",
+        "watch-web": "webpack --watch",
+        "package-web": "webpack --mode production --devtool hidden-source-map"
     },
     "devDependencies": {
         "@actions/core": "1.9.1",
@@ -128,23 +131,33 @@
         "typescript": "3.8.3",
         "vsce": "^1.100.0",
         "webpack": "^5.53.0",
-        "webpack-cli": "^4.8.0",
-        "webpack-dev-server": "^4.2.1"
-    },
+        "webpack-cli": "^4.8.0"
+        },
     "dependencies": {
+        "assert": "^2.0.0",
+        "browserify": "^17.0.0",
+        "crypto-browserify": "^3.12.0",
+        "dotenv": "^10.0.0",
         "follow-redirects": "1.14.8",
+        "https-browserify": "^1.0.0",
         "https-proxy-agent": "5.0.0",
         "mobx": "5.15.4",
         "mobx-react": "6.1.8",
         "node-fetch": "2.6.7",
+        "os": "^0.1.2",
         "react": "16.13.1",
         "react-dom": "16.13.1",
         "react-markdown": "^5.0.3",
         "semver": "7.3.2",
+        "stream": "^0.0.2",
+        "stream-http": "^3.2.0",
+        "path-browserify": "^1.0.1",
+        "browserify-fs": "^1.0.0",
+        "@i2labs/dns": "^1.0.0",
         "tmp": "0.1.0",
         "url-join": "4.0.1",
         "vscode-codicons": "0.0.2",
-        "vscode-extension-telemetry": "0.1.6",
-        "vscode-uri": "2.1.2"
+        "vscode-uri": "2.1.2",
+        "buffer": "^6.0.0"
     }
 }

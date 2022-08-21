@@ -3,11 +3,52 @@
 
 const CopyPlugin = require("copy-webpack-plugin");
 const outputPath = require('path').join(__dirname, 'out');
+const webpack = require('webpack');
 
 const common = {
+    plugins: [
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+            'process.env.MY_ENV': JSON.stringify(process.env.MY_ENV),
+            'process.env.IGNORE_MOBX_MINIFY_WARNING': JSON.stringify(process.env.IGNORE_MOBX_MINIFY_WARNING),
+          }),
+        new webpack.ProvidePlugin({
+         Buffer: ['buffer', 'Buffer'],
+         process: 'process/browser', // provide a shim for the global `process` variable
+
+        }),
+      ],
     resolve: {
-        extensions: ['.js', '.ts', '.tsx'] // .js is neccesary for transitive imports
-    },
+        mainFields: ['browser', 'module', 'main'],
+        extensions: ['.ts', '.js', '.tsx'], // support ts-files and js-files
+        alias: {
+        },
+        fallback: {
+            assert: require.resolve('assert'),
+            buffer: require.resolve('buffer'),
+            console: require.resolve('console-browserify'),
+            constants: require.resolve('constants-browserify'),
+            crypto: require.resolve('crypto-browserify'),
+            domain: require.resolve('domain-browser'),
+            events: require.resolve('events'),
+            http: require.resolve('stream-http'),
+            https: require.resolve('https-browserify'),
+            os: require.resolve('os-browserify/browser'),
+            path: require.resolve('path-browserify'),
+            punycode: require.resolve('punycode'),
+            process: require.resolve('process/browser'),
+            querystring: require.resolve('querystring-es3'),
+            stream: require.resolve('stream-browserify'),
+            string_decoder: require.resolve('string_decoder'),
+            sys: require.resolve('util'),
+            timers: require.resolve('timers-browserify'),
+            tty: require.resolve('tty-browserify'),
+            url: require.resolve('url'),
+            util: require.resolve('util'),
+            vm: require.resolve('vm-browserify'),
+            zlib: require.resolve('browserify-zlib'),
+        },
+      },
     module: {
         rules: [
             {
@@ -87,7 +128,8 @@ module.exports = [
             libraryTarget: 'commonjs2',
             devtoolModuleFilenameTemplate: '../[resource-path]' // https://code.visualstudio.com/api/working-with-extensions/bundling-extension#configure-webpack
         },
-        target: 'node',
+        target: 'webworker',
+       
         externals: {
             vscode: 'commonjs vscode' // the vscode-module is created on-the-fly and must be excluded.
         },

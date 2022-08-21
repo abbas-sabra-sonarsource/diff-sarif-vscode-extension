@@ -29,9 +29,6 @@ describe('activate', () => {
                 '@global': true,
                 ...mockVscode,
             },
-            './telemetry': {
-                activate: () => { },
-            },
         });
         const api = await mockVscodeTestFacing.activateExtension(activate);
         api.openLogs([Uri.parse('file:///.sarif/test.sarif')]);
